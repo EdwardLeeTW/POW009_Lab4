@@ -1,0 +1,1 @@
+ -c -mcpu=$(MP_PROCESSOR_OPTION)  -omf=elf -DXPRJ_default=$(CND_CONF)    -I"sources/driver/power controller" -Wa,-g,--no-relax$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"/Users/edwardlee/GitHub/POW009_Lab3/POW009_LabX.X/sources/driver/power controller/VCOMP_asm.s
