@@ -19,7 +19,7 @@ The hand-on example code for RTC POW009-Lab4 is used to show some design tips.
 - Codebase: POW009-Lab3 v1.0
 
 ## Version Description
-- v1.0 (Nov 4, 2022)
+- v1.0 (Nov 5, 2022)
   - Disable HW-CTXT for AN22-ISR on MCC
   - Enable SW-CTXT on PowerSmartTM
   - Add LED2 as AND22-ISR indicator
