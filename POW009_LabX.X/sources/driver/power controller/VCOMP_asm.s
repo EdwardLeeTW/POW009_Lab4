@@ -2,7 +2,7 @@
 ;  SDK Version: PowerSmart Digital Control Library Designer v1.9.15.709
 ;  CGS Version: Code Generator Script v3.0.11 (01/06/2022)
 ;  Author:      edwardlee
-;  Date/Time:   11/03/2022 17:50:39
+;  Date/Time:   11/04/2022 21:16:21
 ; **********************************************************************************
 ;  3P3Z Control Library File (Fast Floating Point Coefficient Scaling Mode)
 ; **********************************************************************************
@@ -33,9 +33,29 @@
     _VCOMP_Update:                          ; local function label
     
 ;------------------------------------------------------------------------------
+; Save working registers
+    push.s                                  ; save shadowed working registers (WREG0, WREG1, WREG2, WREG3)
+    
+;------------------------------------------------------------------------------
 ; Check status word for Enable/Disable flag and bypass computation, if disabled
     btss [w0], #NPNZ16_STATUS_ENABLED       ; check ENABLED bit state, skip (do not execute) next instruction if set
     bra VCOMP_LOOP_BYPASS                   ; if ENABLED bit is cleared, jump to end of control code
+    
+;------------------------------------------------------------------------------
+; Save working registers
+    push w4                                 ; save working registers used for MAC operations (w4, w5, w6, w8, w10)
+    push w5
+    push w6
+    push w8
+    push w10
+    push ACCAL                              ; save accumulator A register (LOW WORD:   bit <15…0>)
+    push ACCAH                              ; save accumulator A register (HIGH WORD:  bit <31…16>)
+    push ACCAU                              ; save accumulator A register (UPPER BYTE: bit <39…32>)
+    push ACCBL                              ; save accumulator B register (LOW WORD:   bit <15…0>)
+    push ACCBH                              ; save accumulator B register (HIGH WORD:  bit <31…16>)
+    push ACCBU                              ; save accumulator B register (UPPER BYTE: bit <39…32>)
+    push CORCON                             ; save CPU configuration register
+    push SR                                 ; save CPU status register
     
 ;------------------------------------------------------------------------------
 ; Configure DSP for fractional operation with normal saturation (Q1.31 format)
@@ -150,12 +170,32 @@
     mov w4, [w10]                           ; add most recent control output to history
     
 ;------------------------------------------------------------------------------
+; Restore working registers in reverse order
+    pop SR                                  ; restore CPU status registers
+    pop CORCON                              ; restore CPU configuration registers
+    pop ACCBU                               ; restore accumulator B register (UPPER BYTE: bit <39…32>)
+    pop ACCBH                               ; restore accumulator B register (HIGH WORD:  bit <31…16>)
+    pop ACCBL                               ; restore accumulator B register (LOW WORD:   bit <15…0>)
+    pop ACCAU                               ; restore accumulator A register (UPPER BYTE: bit <39…32>)
+    pop ACCAH                               ; restore accumulator A register (HIGH WORD:  bit <31…16>)
+    pop ACCAL                               ; restore accumulator A register (LOW WORD:   bit <15…0>)
+    pop w10                                 ; restore working registers used for MAC operations (w4, w5, w6, w8, w10)
+    pop w8
+    pop w6
+    pop w5
+    pop w4
+    
+;------------------------------------------------------------------------------
 ; Enable/Disable bypass branch target with dummy read of source buffer
     goto VCOMP_LOOP_EXIT                    ; when enabled, step over dummy read and go straight to EXIT
     VCOMP_LOOP_BYPASS:                      ; Enable/Disable bypass branch target to perform dummy read of source to clear the source buffer
     mov [w0 + #ptrSourceRegister], w2       ; load pointer to input source register
     mov [w2], w1                            ; move value from input source into working register
     VCOMP_LOOP_EXIT:                        ; Exit control loop branch target
+    
+;------------------------------------------------------------------------------
+; Restore working registers in reverse order
+    pop.s                                   ; restore shadowed working registers (WREG0, WREG1, WREG2, WREG3)
     
 ;------------------------------------------------------------------------------
 ; End of routine
@@ -246,9 +286,28 @@
     _VCOMP_PTermUpdate:                     ; local function label
     
 ;------------------------------------------------------------------------------
+; Save working registers
+    push.s                                  ; save shadowed working registers (WREG0, WREG1, WREG2, WREG3)
+    
+;------------------------------------------------------------------------------
 ; Check status word for Enable/Disable flag and bypass computation when disabled
     btss [w0], #NPNZ16_STATUS_ENABLED       ; check ENABLED bit state, skip (do not execute) next instruction if set
     bra VCOMP_PTERM_LOOP_BYPASS             ; if ENABLED bit is cleared, jump to end of control code
+    
+;------------------------------------------------------------------------------
+; Save working registers
+    push w4                                 ; save MAC operation working register WREG4
+    push w6                                 ; save MAC operation working register WREG6
+    push w8                                 ; save MAC operation working register WREG8
+    push w10                                ; save MAC operation working register WREG10
+    push ACCAL                              ; save accumulator A register (LOW WORD:   bit <15…0>)
+    push ACCAH                              ; save accumulator A register (HIGH WORD:  bit <31…16>)
+    push ACCAU                              ; save accumulator A register (UPPER BYTE: bit <39…32>)
+    push ACCBL                              ; save accumulator B register (LOW WORD:   bit <15…0>)
+    push ACCBH                              ; save accumulator B register (HIGH WORD:  bit <31…16>)
+    push ACCBU                              ; save accumulator B register (UPPER BYTE: bit <39…32>)
+    push CORCON                             ; save CPU configuration register
+    push SR                                 ; save CPU status register
     
 ;------------------------------------------------------------------------------
 ; Configure DSP for fractional operation with normal saturation (Q1.31 format)
@@ -298,12 +357,31 @@
     mov w4, [w8]                            ; move control output to target address
     
 ;------------------------------------------------------------------------------
+; Restore working registers in reverse order
+    pop SR                                  ; restore CPU status registers
+    pop CORCON                              ; restore CPU configuration registers
+    pop ACCBU                               ; restore accumulator B register (UPPER BYTE: bit <39…32>)
+    pop ACCBH                               ; restore accumulator B register (HIGH WORD:  bit <31…16>)
+    pop ACCBL                               ; restore accumulator B register (LOW WORD:   bit <15…0>)
+    pop ACCAU                               ; restore accumulator A register (UPPER BYTE: bit <39…32>)
+    pop ACCAH                               ; restore accumulator A register (HIGH WORD:  bit <31…16>)
+    pop ACCAL                               ; restore accumulator A register (LOW WORD:   bit <15…0>)
+    pop w10                                 ; restore MAC operation working register WREG10
+    pop w8                                  ; restore MAC operation working register WREG8
+    pop w6                                  ; restore MAC operation working register WREG6
+    pop w4                                  ; restore MAC operation working register WREG4
+    
+;------------------------------------------------------------------------------
 ; Enable/Disable bypass branch target with dummy read of source buffer
     goto VCOMP_PTERM_LOOP_EXIT              ; when enabled, step over dummy read and go straight to EXIT
     VCOMP_PTERM_LOOP_BYPASS:                ; Enable/Disable bypass branch target to perform dummy read of source to clear the source buffer
     mov [w0 + #ptrSourceRegister], w2       ; load pointer to input source register
     mov [w2], w1                            ; move value from input source into working register
     VCOMP_PTERM_LOOP_EXIT:                  ; Exit P-Term control loop branch target
+    
+;------------------------------------------------------------------------------
+; Restore working registers in reverse order
+    pop.s                                   ; restore shadowed working registers (WREG0, WREG1, WREG2, WREG3)
     
 ;------------------------------------------------------------------------------
 ; End of routine

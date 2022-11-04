@@ -202,6 +202,152 @@
 #define VoutFB_SetDigitalOutput() (_TRISE2 = 0)
 /**
   @Summary
+    Sets the GPIO pin, RE5, high using LATE5.
+
+  @Description
+    Sets the GPIO pin, RE5, high using LATE5.
+
+  @Preconditions
+    The RE5 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE5 high (1)
+    LED2_SetHigh();
+    </code>
+
+*/
+#define LED2_SetHigh()          (_LATE5 = 1)
+/**
+  @Summary
+    Sets the GPIO pin, RE5, low using LATE5.
+
+  @Description
+    Sets the GPIO pin, RE5, low using LATE5.
+
+  @Preconditions
+    The RE5 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE5 low (0)
+    LED2_SetLow();
+    </code>
+
+*/
+#define LED2_SetLow()           (_LATE5 = 0)
+/**
+  @Summary
+    Toggles the GPIO pin, RE5, using LATE5.
+
+  @Description
+    Toggles the GPIO pin, RE5, using LATE5.
+
+  @Preconditions
+    The RE5 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RE5
+    LED2_Toggle();
+    </code>
+
+*/
+#define LED2_Toggle()           (_LATE5 ^= 1)
+/**
+  @Summary
+    Reads the value of the GPIO pin, RE5.
+
+  @Description
+    Reads the value of the GPIO pin, RE5.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RE5
+    postValue = LED2_GetValue();
+    </code>
+
+*/
+#define LED2_GetValue()         _RE5
+/**
+  @Summary
+    Configures the GPIO pin, RE5, as an input.
+
+  @Description
+    Configures the GPIO pin, RE5, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE5 as an input
+    LED2_SetDigitalInput();
+    </code>
+
+*/
+#define LED2_SetDigitalInput()  (_TRISE5 = 1)
+/**
+  @Summary
+    Configures the GPIO pin, RE5, as an output.
+
+  @Description
+    Configures the GPIO pin, RE5, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE5 as an output
+    LED2_SetDigitalOutput();
+    </code>
+
+*/
+#define LED2_SetDigitalOutput() (_TRISE5 = 0)
+/**
+  @Summary
     Sets the GPIO pin, RE6, high using LATE6.
 
   @Description

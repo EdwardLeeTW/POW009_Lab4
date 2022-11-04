@@ -108,7 +108,7 @@
 #pragma config SPI2PIN = PPS    //SPI2 Pin Select bit->SPI2 uses I/O remap (PPS) pins
 
 // FALTREG
-#pragma config CTXT1 = IPL6    //Specifies Interrupt Priority Level (IPL) Associated to Alternate Working Register 1 bits->Alternate Register set assigned to IPL level 6
+#pragma config CTXT1 = OFF    //Specifies Interrupt Priority Level (IPL) Associated to Alternate Working Register 1 bits->Not Assigned
 #pragma config CTXT2 = OFF    //Specifies Interrupt Priority Level (IPL) Associated to Alternate Working Register 2 bits->Not Assigned
 #pragma config CTXT3 = OFF    //Specifies Interrupt Priority Level (IPL) Associated to Alternate Working Register 3 bits->Not Assigned
 #pragma config CTXT4 = OFF    //Specifies Interrupt Priority Level (IPL) Associated to Alternate Working Register 4 bits->Not Assigned
@@ -124,17 +124,19 @@
 #include "clock.h"
 #include "system.h"
 #include "system_types.h"
+#include "cmp1.h"
 #include "tmr1.h"
+#include "pwm.h"
 #include "interrupt_manager.h"
 #include "traps.h"
 #include "adc1.h"
-#include "pwm.h"
 
 void SYSTEM_Initialize(void)
 {
     PIN_MANAGER_Initialize();
     CLOCK_Initialize();
     INTERRUPT_Initialize();
+    CMP1_Initialize();
     ADC1_Initialize();
     PWM_Initialize();
     TMR1_Initialize();

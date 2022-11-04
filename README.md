@@ -22,8 +22,8 @@ The hand-on example code for RTC POW009-Lab4 is used to show some design tips.
 - v1.0 (Nov 4, 2022)
   - Disable HW-CTXT for AN22-ISR on MCC
   - Enable SW-CTXT on PowerSmartTM
-  - LED2 as AND22-ISR indicator
-  - DAC1 as output of digital compensator
+  - Add LED2 as AND22-ISR indicator
+  - Add DAC1 as output of digital compensator
 
 - - -
 

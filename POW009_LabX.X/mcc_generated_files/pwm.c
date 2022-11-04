@@ -136,8 +136,8 @@ void PWM_Initialize (void)
     PG4DCA = 0x00;
     // PER 15992; 
     PG4PER = 0x3E78;
-    // TRIGA 0; 
-    PG4TRIGA = 0x00;
+    // TRIGA 7000; 
+    PG4TRIGA = 0x1B58;
     // TRIGB 0; 
     PG4TRIGB = 0x00;
     // TRIGC 0; 

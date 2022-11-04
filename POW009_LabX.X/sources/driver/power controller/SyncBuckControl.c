@@ -31,6 +31,7 @@
 // 3p3z Controller Include Files
 #include "VCOMP.h"                                // include 'VCOMP' controller header file
 #include "SyncBuckControl.h"
+#include "../../../mcc_generated_files/pin_manager.h"
 
 volatile uint16_t VCOMP_ControlObject_Initialize(void)
 {
@@ -97,14 +98,18 @@ volatile uint16_t VCOMP_ControlObject_Initialize(void)
  *
  * **************************************************************************************************/
 
-void __attribute__((__interrupt__, no_auto_psv, context)) _ADCAN22Interrupt(void)
+//void __attribute__((__interrupt__, no_auto_psv, context)) _ADCAN22Interrupt(void)
+void __attribute__((__interrupt__, auto_psv)) _ADCAN22Interrupt(void)
 {
+    LED2_SetHigh();
+    
+    VCOMP_Update(&VCOMP);               // Call control loop
+    //VCOMP_PTermUpdate(&VCOMP);        // Call P-Term control loop
 
-    VCOMP_Update(&VCOMP);                               // Call control loop
-    //VCOMP_PTermUpdate(&VCOMP);                        // Call P-Term control loop
-
-    IFS7bits.ADCAN22IF = 0;                             // Clear the interrupt flag
-
+    DAC1DATH = PG4DC>>2;                // Scaling PG4DC to DAC1 when PER=15992
+    
+    LED2_SetLow();
+    IFS7bits.ADCAN22IF = 0;             // Clear the interrupt flag
 }
 
 //**********************************************************************************

@@ -32,6 +32,7 @@
         <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
         <itemPath>mcc_generated_files/reset_types.h</itemPath>
         <itemPath>mcc_generated_files/system.h</itemPath>
+        <itemPath>mcc_generated_files/cmp1.h</itemPath>
       </logicalFolder>
       <logicalFolder name="os" displayName="os" projectFiles="true">
         <itemPath>sources/os/os_timer.h</itemPath>
@@ -70,6 +71,7 @@
         <itemPath>mcc_generated_files/clock.c</itemPath>
         <itemPath>mcc_generated_files/mcc.c</itemPath>
         <itemPath>mcc_generated_files/adc1.c</itemPath>
+        <itemPath>mcc_generated_files/cmp1.c</itemPath>
       </logicalFolder>
       <logicalFolder name="os" displayName="os" projectFiles="true">
         <itemPath>sources/os/os_scheduler_100us.c</itemPath>

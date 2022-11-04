@@ -3,7 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/edwardlee/GitHub/POW009_Lab3/POW009_LabX.X/sources/driver/power%20controller/SyncBuckControl.c</file>
+            <file>file:/Users/edwardlee/GitHub/POW009_Lab4/POW009_LabX.X/main_tasks.c</file>
+            <file>file:/Users/edwardlee/GitHub/POW009_Lab4/POW009_LabX.X/mcc_generated_files/pwm.c</file>
         </group>
     </open-files>
 </project-private>
