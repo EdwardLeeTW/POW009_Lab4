@@ -103,9 +103,30 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN22Interrupt(void)
 {
     LED2_SetHigh();
     
+#if 0
     VCOMP_Update(&VCOMP);               // Call control loop
     //VCOMP_PTermUpdate(&VCOMP);        // Call P-Term control loop
+#else
+    uint16_t valVoutFB;
+    //Read the ADC value from the ADCBUF
+    valVoutFB = ADCBUF22;
 
+    #define Ctrl_Q_Kp       10                      //SX.Q => X_max = 2^(15-Q)
+    #define Ctrl_Kp         (int)(21.122 * 1023)    //Kp
+    #define Ctrl_Vref       VCOMP_VREF              //Q0
+    #define Ctrl_MaxDuty    14393                   //Q0
+    int ctrl_error, ctrl_Comp;
+    register int a_reg asm("A");
+
+    _SATA=1;                                                    //1.31
+    ctrl_error = Ctrl_Vref - valVoutFB;
+    a_reg = __builtin_mpy(ctrl_error, Ctrl_Kp, 0,0,0,0,0,0);    // A(Q1.31) = (ctrl_error * Ctrl_Kp) << 1
+    a_reg = __builtin_sftac(a_reg , (-15+Ctrl_Q_Kp));           // A(Q1.31) = A(Q1.31) << (15-Ctrl_Q_Kp)
+    ctrl_Comp = __builtin_sac(a_reg, 0);                        // ctrl_Comp = A(Q1.31) >> 16
+    if(ctrl_Comp < 16) ctrl_Comp = 16;
+    else if (ctrl_Comp > Ctrl_MaxDuty) ctrl_Comp = Ctrl_MaxDuty;
+    PG4DC = ctrl_Comp;
+#endif
     DAC1DATH = PG4DC>>2;                // Scaling PG4DC to DAC1 when PER=15992
     
     LED2_SetLow();
