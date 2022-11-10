@@ -3,14 +3,14 @@
 
 - - -
 ## Hardward EVM Boards Used:
-## DSPIC33CK CURIOSITY DEVELOPMENT BOARD
+## dsPIC33CK CURIOSITY DEVELOPMENT BOARD
 Part Number: DM330030
 
 ![image](https://www.microchip.com/content/dam/mchp/mrt-dam/devtools/2956-ds-33ck256mp508-curiosity-development-board.jpg) 
 ## Microchip APP-POWERRTC1 EVM
 Part Number: APP-POWERRTC1
 
-![image](https://a.rimg.com.tw/s1/6/a1/07/22025696299271_191.jpg) 
+![image](https://user-images.githubusercontent.com/61537309/200981047-40299d0a-b8eb-444b-9387-21ed9d8a1a8a.png)
 - - -
 
 ## Summary
@@ -52,7 +52,7 @@ Alternative Controller Plug-In Module:
 
 ## Hardware Used
 
-- DSPIC33CK CURIOSITY DEVELOPMENT BOARD, Part-No. [DM330030](https://www.microchip.com/en-us/development-tool/DM330030)
+- dsPIC33CK CURIOSITY DEVELOPMENT BOARD, Part-No. [DM330030](https://www.microchip.com/en-us/development-tool/DM330030)
 - Microchip APP-POWERRTC1 EVM, Part-No. [APP-POWERRTC1](https://shopee.tw/%E3%80%90ICBOX%E3%80%91Microchip-APP-POWERRTC1-%E5%AF%A6%E9%A9%97%E6%9D%BF-0300801566001-i.219280202.7044587367)
 
 ## Supported Target Devices
