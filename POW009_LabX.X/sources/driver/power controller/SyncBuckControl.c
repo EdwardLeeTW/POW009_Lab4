@@ -103,7 +103,7 @@ void __attribute__((__interrupt__, auto_psv)) _ADCAN22Interrupt(void)
 {
     LED2_SetHigh();
     
-#if 0
+#if 1
     VCOMP_Update(&VCOMP);               // Call control loop
     //VCOMP_PTermUpdate(&VCOMP);        // Call P-Term control loop
 #else
