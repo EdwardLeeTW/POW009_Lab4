@@ -19,7 +19,13 @@ The hand-on example code for RTC POW009-Lab4 is used to show some design tips.
 - Codebase: POW009-Lab3 v1.0
 
 ## Version Description
+- v2.0 (Nov 10, 2022)
+  - Based on Lab4 v1.0
+  - Add Mindi/Plant modeling example for reference
+  - Add manual Kp control code example into AN22 ISR
+  - Update Bode-100 file
 - v1.0 (Nov 5, 2022)
+  - Based on Lab3 v1.0
   - Disable HW-CTXT for AN22-ISR on MCC
   - Enable SW-CTXT on PowerSmartTM
   - Add LED2 as AND22-ISR indicator
