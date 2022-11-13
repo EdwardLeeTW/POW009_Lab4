@@ -5,7 +5,7 @@
 #endif
 
 // Compensator Softstart
-#define VCOMP_VREF          3787
+#define VCOMP_VREF          2500
 
 // Compensator Clamp Limits
 #define VCOMP_MIN_CLAMP     0x0010
