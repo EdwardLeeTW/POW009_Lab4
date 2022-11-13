@@ -19,9 +19,8 @@ The hand-on example code for RTC POW009-Lab4 is used to show some design tips.
 - Codebase: POW009-Lab3 v1.0
 
 ## Version Description
-- v2.0 (Nov 10, 2022)
+- v2.0 (Nov 13, 2022)
   - Based on Lab4 v1.0
-  - Add Mindi/Plant modeling example for reference
   - Add manual Kp control code example into AN22 ISR
   - Update Bode-100 file
 - v1.0 (Nov 5, 2022)
